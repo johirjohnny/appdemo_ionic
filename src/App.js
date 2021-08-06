@@ -1,5 +1,5 @@
 import logo from './logo.svg';
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import './App.css';
 import '@ionic/core/css/core.css';
 import '@ionic/core/css/ionic.bundle.css';
@@ -10,25 +10,41 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
- 
-} from '@ionic/react';
+  IonPage
+} from '@ionic/react'
+import Pages from './Component/Pages/Pages';
+import Home from './Component/Home/Home';
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-class App extends Component {
-  render() {
-    return (
-      <IonApp>
+import Release from './Component/Release/Release';
+
+
+function App() {
+
+
+  return (
+    <IonPage>
       <IonHeader>
-        <IonToolbar color="primary">
-          <IonTitle>Mobile App Demo</IonTitle>
+        <IonToolbar>
+          <IonTitle>
+            HomePage
+          </IonTitle>
         </IonToolbar>
       </IonHeader>
       <IonContent>
-        <h1>Hello World</h1>
-      </IonContent>
-    </IonApp>
+        <Home></Home>
+        <Router>
+          <Switch>
+            <Route exact path="/release/:name" component={Release}>
+            </Route>
+          </Switch>
+        </Router>
 
-    );
-  }
+      </IonContent>
+    </IonPage>
+
+  );
 }
+
 
 export default App;
