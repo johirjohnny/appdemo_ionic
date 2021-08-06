@@ -13,6 +13,7 @@ const Home = () => {
       .then((res) => res.json())
       .then((data) => setPages(data.items));
   }, [])
+  console.log(pages);
   return(
     <IonContent>
         {
