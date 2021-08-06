@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import ReleaseDetails from "./ReleaseDetails";
 import {
   IonCard,
   IonContent,
@@ -10,22 +11,26 @@ import { useParams } from "react-router";
 
 const Release = () => {
   const { name } = useParams();
+  console.log(name)
 
-  const [release, setRelease] = useState([]);
+  const [releases, setReleases] = useState([]);
   useEffect(() => {
-    fetch(`https://api.github.com/repos/mozilla/${name}/releases`)
+    fetch(`https://api.github.com/repos/mozilla/zamboni/releases`)
       .then((res) => res.json())
       //.then((data) => setPosts(data.items))
-      .then((data) => setRelease(data));
+      .then((data) => setReleases(data));
   }, [name]);
-  console.log(release);
+  console.log(releases);
+
   return (
-    <>
-      {release.map((data) => (
-        <IonPage>{data.id}</IonPage>
-      ))}
-    </>
+    <IonContent>
+      {
+        releases.map(release => 
+        <ReleaseDetails data={release}></ReleaseDetails>)
+      }  
+    </IonContent>
   );
+  
 };
 
 export default Release;

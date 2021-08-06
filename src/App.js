@@ -10,12 +10,15 @@ import {
   IonHeader,
   IonTitle,
   IonToolbar,
-  IonPage
+  IonPage,
+  IonRouterOutlet,
 } from '@ionic/react'
 import Pages from './Component/Pages/Pages';
 import Home from './Component/Home/Home';
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
+import { IonReactRouter } from '@ionic/react-router';
+import { Redirect } from 'react-router-dom';
 import Release from './Component/Release/Release';
 
 
@@ -23,25 +26,25 @@ function App() {
 
 
   return (
-    <IonPage>
-      <IonHeader>
-        <IonToolbar>
-          <IonTitle>
-            HomePage
-          </IonTitle>
-        </IonToolbar>
-      </IonHeader>
-      <IonContent>
-        <Home></Home>
-        <Router>
-          <Switch>
-            <Route exact path="/release/:name" component={Release}>
+    <IonApp>
+      <IonReactRouter>
+        <IonHeader>
+          <IonToolbar>
+            <IonTitle>
+              HomePage
+            </IonTitle>
+          </IonToolbar>
+        </IonHeader>
+        <IonContent>
+          <IonRouterOutlet>
+            <Home></Home>
+              <Route exact path="/release/:name">
+                <Release/>
             </Route>
-          </Switch>
-        </Router>
-
-      </IonContent>
-    </IonPage>
+          </IonRouterOutlet>
+        </IonContent>
+      </IonReactRouter>
+    </IonApp>
 
   );
 }

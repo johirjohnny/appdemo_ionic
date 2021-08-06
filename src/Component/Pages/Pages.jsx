@@ -34,7 +34,7 @@ const Pages = ({ page }) => {
         <IonCol>
           <h5>Description : {description}</h5>
         </IonCol>
-        <IonButton routerLink={"/release/" + name}>Releases</IonButton>
+        <IonButton routerLink={"/release/"+name}>Releases</IonButton>
         {/* <IonButton onclick={(e) => {
             e.preventDefault();
             history.push("/release/"+name)}}>Blog</IonButton> */}
