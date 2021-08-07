@@ -18,7 +18,7 @@ const Release = () => {
     fetch(`https://api.github.com/repos/mozilla/${name}/releases`)
       .then((res) => res.json())
       //.then((data) => setPosts(data.items))
-      .then((data) => setReleases(data));
+      .then((data) => setReleases(  data));
   }, [name]);
   console.log(releases);
 

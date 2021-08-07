@@ -19,27 +19,30 @@ import { IonReactRouter } from "@ionic/react-router";
 import Release from "../Release/Release";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
-const Pages = ({ page }) => {
-  const { id, name, full_name, description } = page.repository;
-  const router = useIonRouter();
+const Pages = ({ post, posts, loading }) => {
+  const { id, name, full_name, description } = post.repository;
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
   return (
-    
-      <IonGrid>
-        <IonCol>
-          <h2>Name : {name}</h2>
-        </IonCol>
-        <IonCol>
-          <h4>Id : {id}</h4>
-        </IonCol>
-        <IonCol>
-          <h5>Description : {description}</h5>
-        </IonCol>
-        <IonButton routerLink={"/release/"+name}>Releases</IonButton>
-        {/* <IonButton onclick={(e) => {
+    <IonGrid>
+      <IonCol>
+        <h2>Name : {name}</h2>
+      </IonCol>
+      <IonCol>
+        <h4>Id : {id}</h4>
+      </IonCol>
+      <IonCol>
+        <h4>Full Name : {full_name}</h4>
+      </IonCol>
+      <IonCol>
+        <h5>Description : {description}</h5>
+      </IonCol>
+      <IonButton routerLink={"/release/" + name}>Releases</IonButton>
+      {/* <IonButton onclick={(e) => {
             e.preventDefault();
             history.push("/release/"+name)}}>Blog</IonButton> */}
-      </IonGrid>
-    
+    </IonGrid>
   );
 };
 
