@@ -30,7 +30,7 @@ const Home = () => {
     <IonContent>
       {/* posts = {currentPosts}; */}
       {currentPosts.map((post) => (
-        <Pages post={post}></Pages>
+        <Pages post={post} loading={loading}></Pages>
       ))}
       {/* <Pages posts={currentPosts} loading={loading} /> */}
       <Pagination
