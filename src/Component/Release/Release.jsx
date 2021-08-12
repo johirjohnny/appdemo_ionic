@@ -30,13 +30,13 @@ const Release = () => {
     //   });
     async function fetchData() {
         try {
-          const result = await axios.get(`https://api.github.com/repos/mozilla/${name}/releases`)
+          const result = await axios.get(`https://api.github.com/repos/mozilla/${name}/releases`) //fetch data from the releases api
           setReleases(result.data);
         } catch (error) {
           console.error(error);
         }
       }
-  }, [name]);
+  }, [name]);   //change data when name change
 
   console.log(releases);
 
@@ -48,7 +48,7 @@ const Release = () => {
 
       <IonContent>
         {releases.map((release) => (
-          <ReleaseDetails data={release}></ReleaseDetails>
+          <ReleaseDetails data={release}></ReleaseDetails>  
         ))}
       </IonContent>
     </IonPage>
