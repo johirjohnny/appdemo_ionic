@@ -7,6 +7,7 @@ import {
   IonGrid,
   IonHeader,
   IonPage,
+  IonSpinner,
   IonTitle,
   IonToolbar,
   useIonRouter,
@@ -15,19 +16,17 @@ import { useParams } from "react-router";
 
 const Release = () => {
   const { name } = useParams();
-  console.log(name);
 
+  console.log(name);
+  const [showLoading, setShowLoading] = useState(true);
   const [releases, setReleases] = useState([]);
   useEffect(() => {
     // axios
     //   .get(`https://api.github.com/repos/mozilla/${name}/releases`)
-       fetch(`https://api.github.com/repos/mozilla/${name}/releases`)
+    fetch(`https://api.github.com/repos/mozilla/${name}/releases`)
       .then((res) => res.json())
       //.then((data) => setPosts(data.items))
-      .then((data) => setReleases(data))
-      .catch((error) => {
-        console.log(error);
-      });
+      .then((data) => setReleases(data));
     // async function fetchData() {
     //     try {
     //       const result = await axios.get(`https://api.github.com/repos/mozilla/${name}/releases`) //fetch data from the releases api
@@ -36,8 +35,10 @@ const Release = () => {
     //       console.error(error);
     //     }
     //   }
-  }, [name]);   //change data when name change
-
+  }, [name]); //change data when name change
+  setTimeout(() => {
+    setShowLoading(false);
+  }, 4000);
   console.log(releases);
 
   return (
@@ -48,7 +49,7 @@ const Release = () => {
 
       <IonContent>
         {releases.map((release) => (
-          <ReleaseDetails data={release}></ReleaseDetails>  
+          <ReleaseDetails data={release}></ReleaseDetails>
         ))}
       </IonContent>
     </IonPage>
