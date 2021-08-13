@@ -21,21 +21,21 @@ const Release = () => {
   useEffect(() => {
     // axios
     //   .get(`https://api.github.com/repos/mozilla/${name}/releases`)
-    //   // fetch(`https://api.github.com/repos/mozilla/${name}/releases`)
-    //   .then((res) => res.json())
-    //   //.then((data) => setPosts(data.items))
-    //   .then((data) => setReleases(data))
-    //   .catch((error) => {
-    //     console.log(error);
-    //   });
-    async function fetchData() {
-        try {
-          const result = await axios.get(`https://api.github.com/repos/mozilla/${name}/releases`) //fetch data from the releases api
-          setReleases(result.data);
-        } catch (error) {
-          console.error(error);
-        }
-      }
+       fetch(`https://api.github.com/repos/mozilla/${name}/releases`)
+      .then((res) => res.json())
+      //.then((data) => setPosts(data.items))
+      .then((data) => setReleases(data))
+      .catch((error) => {
+        console.log(error);
+      });
+    // async function fetchData() {
+    //     try {
+    //       const result = await axios.get(`https://api.github.com/repos/mozilla/${name}/releases`) //fetch data from the releases api
+    //       setReleases(result.data);
+    //     } catch (error) {
+    //       console.error(error);
+    //     }
+    //   }
   }, [name]);   //change data when name change
 
   console.log(releases);

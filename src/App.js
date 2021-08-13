@@ -31,7 +31,7 @@ function App() {
         <IonHeader>
           <IonToolbar>
             <IonTitle>
-              HomePage
+              WpCafe HomePage 
             </IonTitle>
           </IonToolbar>
         </IonHeader>

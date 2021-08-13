@@ -1,13 +1,22 @@
 import React, { Component, useState, useEffect } from "react";
 import Pages from "../Pages/Pages";
-import Pagination from "../Pagination/Pagination";
+import ReactPaginate from "react-paginate";
 import { IonGrid, IonRow, IonCol, IonContent } from "@ionic/react";
+import "./Home.css";
 
 const Home = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(5);
+  const [pageNumber, setPageNumber] = useState(0);
+  const usersPerPage = 5;
+  const pagesVisited = pageNumber * usersPerPage;
+
+  const displayUsers = posts.slice(pagesVisited, pagesVisited + usersPerPage);
+  const pageCount = Math.ceil(posts.length);
+
+  const changePage = ({ selected }) => {
+    setPageNumber(selected);
+  };
 
   useEffect(() => {
     fetch(
@@ -18,26 +27,26 @@ const Home = () => {
     setLoading(false);
   }, []);
 
-  // Get current posts
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = posts.slice(indexOfFirstPost, indexOfLastPost);
-
-  // Change page
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  //   console.log(posts);
   return (
     <IonContent>
       {/* posts = {currentPosts}; */}
-      {currentPosts.map((post) => (
+      {displayUsers.map((post) => (
         <Pages post={post} loading={loading}></Pages>
       ))}
-      {/* <Pages posts={currentPosts} loading={loading} /> */}
-      <Pagination
-        postsPerPage={postsPerPage}
-        totalPosts={posts.length}
-        paginate={paginate}
+
+      <ReactPaginate
+        previousLabel={"Previous"}
+        nextLabel={"Next"}
+        pageCount={pageCount}
+        onPageChange={changePage}
+        containerClassName={"paginationBttns"}
+        previousLinkClassName={"previousBttn"}
+        nextLinkClassName={"nextBttn"}
+        disabledClassName={"paginationDisabled"}
+        activeClassName={"paginationActive"}
       />
+
+      {/* <Pages posts={currentPosts} loading={loading} /> */}
     </IonContent>
   );
 };
